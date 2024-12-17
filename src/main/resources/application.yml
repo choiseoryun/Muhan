@@ -1,0 +1,51 @@
+server:
+  port: 60010
+  servlet:
+    context-path: /
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/db24310?serverTimezone=Asia/Seoul
+    username: dbid233
+    password: dbpass233
+
+  task:
+      scheduling: enabled=true
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: validate  # update에서 validate로 변경
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        show_sql: true
+        format_sql: true
+        jdbc:
+          batch_size: 1000
+        order_updates: true
+        order_inserts: true
+        generate_statistics: false  # 실행 오래걸려서일단 false로
+      open-in-view: false  # 실행오래걸려서 false로
+
+  # 파일 업로드 설정 (나중에 필요함)
+  servlet:
+    multipart:
+      enabled: true # 이거랑
+      location: \home\t24310\MuhanParking\src\main\frontend\public\ # 이거 넣었어요
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+
+logging:
+  level:
+    org.springframework.security: debug
+    org.hibernate.SQL: debug  # 콘솔에 쿼리 보이게
+    com.example.muhanparking: debug  # 패키지는 debug 레벨로
+jwt:
+  secret: "your-secret-key-please-change-this-to-something-secure" # 실제로는 더 복잡한 값 사용해야 함
